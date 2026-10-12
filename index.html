@@ -1,0 +1,63 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="robots" content="noindex, nofollow">
+<title>Marks · Royal International School</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@700&family=Nunito+Sans:wght@400;700;900&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --red: #c41e2e; --blue: #0a7dc2; --blue-dark: #0868a3; --blue-ink: #054a75; --blue-tint: #e3f1fa;
+    --yellow: #f2c91c; --yellow-ink: #5c4700; --yellow-tint: #fdf3c4; --ink: #1a1f2b; --muted: #4a5260;
+  }
+  * { box-sizing: border-box; }
+  html { background: linear-gradient(90deg, var(--blue) 0%, var(--blue) 50%, var(--yellow) 50%, var(--yellow) 100%); min-height: 100%; }
+  body { margin: 0; min-height: 100vh; font-family: 'Nunito Sans', system-ui, sans-serif; color: var(--ink); background: transparent; }
+  .wrap { max-width: 440px; margin: 0 auto; padding: 20px 16px 24px; min-height: 100vh; display: flex; flex-direction: column; gap: 14px; }
+  .stripe { height: 8px; background: var(--red); border-radius: 4px; }
+  .center { flex-grow: 1; display: flex; flex-direction: column; justify-content: center; padding-top: 80px; gap: 14px; }
+  .card { background: #fff; border-radius: 24px; box-shadow: 0 8px 24px rgba(0, 0, 0, 0.18); }
+  .hero { position: relative; padding: 104px 22px 24px; display: flex; flex-direction: column; align-items: center; gap: 6px; }
+  .hero img { position: absolute; top: -78px; width: 170px; height: 170px; object-fit: contain; }
+  .school { margin: 0; display: flex; flex-direction: column; align-items: center; font-family: 'Cinzel', Georgia, serif; font-weight: 700; font-size: 24px; color: var(--red); line-height: 1.15; text-align: center; }
+  .sub { font-size: 16px; font-weight: 700; color: var(--blue-ink); }
+  .list { padding: 16px; display: flex; flex-direction: column; gap: 10px; border-radius: 20px; }
+  .list h2 { margin: 0 0 2px; font-family: 'Cinzel', Georgia, serif; font-size: 18px; color: var(--blue-dark); }
+  .build { min-height: 68px; border-radius: 14px; padding: 10px 16px; display: flex; align-items: center; justify-content: space-between; gap: 12px; text-decoration: none; color: var(--ink); }
+  .build.blue { background: var(--blue-tint); }
+  .build.yellow { background: var(--yellow-tint); }
+  .build .t { display: flex; flex-direction: column; }
+  .build .big { font-size: 19px; font-weight: 900; }
+  .build .small { font-size: 13px; font-weight: 700; color: var(--blue-ink); }
+  .build.yellow .small { color: var(--yellow-ink); }
+  .build:focus-visible { outline: 3px solid var(--blue-ink); outline-offset: 2px; }
+  svg { width: 22px; height: 22px; flex-shrink: 0; }
+</style>
+</head>
+<body>
+<main class="wrap">
+  <div class="stripe"></div>
+  <div class="center">
+    <section class="card hero">
+      <img src="logo.png" alt="Royal International School crest">
+      <h1 class="school"><span>Royal</span><span>International</span><span>School</span></h1>
+      <span class="sub">Student Marks</span>
+    </section>
+    <nav class="card list" aria-labelledby="pick">
+      <h2 id="pick">Choose a portal</h2>
+      <a class="build blue" href="26-27-ESL/">
+        <span class="t"><span class="big">2026/27 ESL</span><span class="small">9A1 · 9A2 · 9A3 · 10A1</span></span>
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M9 6l6 6-6 6"/></svg>
+      </a>
+      <a class="build yellow" href="26-27-ALL/">
+        <span class="t"><span class="big">2026/27 All Classes</span><span class="small">All subjects (test)</span></span>
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M9 6l6 6-6 6"/></svg>
+      </a>
+    </nav>
+  </div>
+</main>
+</body>
+</html>
