@@ -361,7 +361,7 @@ function renderClasses() {
     var color = gradeIdx % 2 === 0 ? 'blue' : 'yellow';
     byGrade[g].forEach(function (c) {
       var count = c.count == null ? 'View students' : c.count + ' student' + (c.count === 1 ? '' : 's');
-      html += '<button type="button" class="row-link ' + color + '" data-class="' + c.index + '">' +
+      html += '<button type="button" class="row-link ' + color + '" data-class="' + esc(c.index) + '">' +
         '<span class="t"><span class="big">' + esc(c.name) + '</span><span class="small">' + esc(count) + '</span></span>' + CHEV_R + '</button>';
     });
   });
@@ -369,8 +369,8 @@ function renderClasses() {
   app.innerHTML = html;
   Array.prototype.forEach.call(app.querySelectorAll('[data-class]'), function (b) {
     b.addEventListener('click', function () {
-      var idx = Number(b.getAttribute('data-class'));
-      var c = state.classes.filter(function (x) { return x.index === idx; })[0];
+      var idx = b.getAttribute('data-class');
+      var c = state.classes.filter(function (x) { return String(x.index) === idx; })[0];
       openClass(c);
     });
   });
