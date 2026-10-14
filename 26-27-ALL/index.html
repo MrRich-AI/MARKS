@@ -268,11 +268,26 @@ function marksSection(s) {
   return html + '</section>';
 }
 
+// Term total = the AVERAGE of each marked assignment's percentage
+// (every assignment counts equally), matching the school sheet's
+// Percentage column: AVERAGE(FILTER(mark / out-of * 100, ISNUMBER(...))).
+// Blank or text marks (e.g. "Abs") are skipped, as in the sheet.
+function termPercent(t) {
+  if (!t || !t.available || !t.assignments) return null;
+  var sum = 0, n = 0;
+  t.assignments.forEach(function (a) {
+    if (a.mark === null || String(a.mark).trim() === '') return;
+    var m = Number(String(a.mark).trim().replace(',', '.')), x = Number(a.max);
+    if (isNaN(m) || !x) return;
+    sum += m / x * 100; n++;
+  });
+  return n ? Math.round(sum / n) : null;
+}
+
 function totalChip(s) {
-  var t = s.terms[state.term];
-  if (!t || !t.available || !t.total) return '';
-  if (!t.total.possible) return '';
-  return '<span class="chip yellow">Term ' + state.term + ' [MA] Total ' + Math.round(t.total.earned / t.total.possible * 100) + '%</span>';
+  var p = termPercent(s.terms[state.term]);
+  if (p === null) return '';
+  return '<span class="chip yellow">Term ' + state.term + ' [MA] Total ' + p + '%</span>';
 }
 
 function termTabs() {
@@ -315,10 +330,8 @@ function renderChooseClass() {
     '<section class="card list" aria-labelledby="ch"><h2 class="serif" id="ch" style="margin:0;font-size:18px;color:var(--blue-dark)">Choose a class</h2>';
   state.myClasses.forEach(function (c, i) {
     var color = i % 2 === 0 ? 'blue' : 'yellow';
-    var t = c.terms && c.terms[1];
-    var sub = (t && t.available && t.total && t.total.possible)
-      ? 'Term 1 [MA] Total ' + Math.round(t.total.earned / t.total.possible * 100) + '%'
-      : 'View marks';
+    var p1 = termPercent(c.terms && c.terms[1]);
+    var sub = p1 !== null ? 'Term 1 [MA] Total ' + p1 + '%' : 'View marks';
     html += '<button type="button" class="row-link ' + color + '" data-pick="' + i + '">' +
       '<span class="t"><span class="big">' + esc(c.className) + '</span><span class="small">' + esc(sub) + '</span></span>' + CHEV_R + '</button>';
   });
