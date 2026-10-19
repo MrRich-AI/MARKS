@@ -72,6 +72,7 @@
   .eng { font-size: 26px; color: var(--red); text-align: center; line-height: 1.15; }
   .viet { font-size: 17px; font-weight: 700; text-align: center; }
   .chips { display: flex; flex-wrap: wrap; justify-content: center; gap: 8px; margin-top: 8px; }
+  .teacher { margin-top: 6px; font-size: 14px; font-weight: 700; color: var(--muted); text-align: center; }
   .chip { padding: 5px 12px; border-radius: 999px; font-size: 13px; font-weight: 900; }
   .chip.blue { background: var(--blue-tint); color: var(--blue-ink); }
   .chip.yellow { background: var(--yellow-tint); color: var(--yellow-ink); }
@@ -314,6 +315,7 @@ function studentBody(s) {
       '<span class="eng serif">' + esc(s.englishName || s.fullName) + '</span>' +
       '<span class="viet">' + esc(s.fullName) + '</span>' +
       '<div class="chips"><span class="chip blue">Class ' + esc(s.className) + '</span>' + totalChip(s) + '</div>' +
+      (s.teacher ? '<span class="teacher">Teacher: ' + esc(s.teacher) + '</span>' : '') +
     '</div>' +
     termTabs() +
     marksSection(s);
@@ -333,7 +335,7 @@ function renderChooseClass() {
     var p1 = termPercent(c.terms && c.terms[1]);
     var sub = p1 !== null ? 'Term 1 [MA] Total ' + p1 + '%' : 'View marks';
     html += '<button type="button" class="row-link ' + color + '" data-pick="' + i + '">' +
-      '<span class="t"><span class="big">' + esc(c.className) + '</span><span class="small">' + esc(sub) + '</span></span>' + CHEV_R + '</button>';
+      '<span class="t"><span class="big">' + esc(c.className) + (c.teacher ? ' — ' + esc(c.teacher) : '') + '</span><span class="small">' + esc(sub) + '</span></span>' + CHEV_R + '</button>';
   });
   html += '</section><button class="btn" type="button" id="logout">Log out</button>';
   app.innerHTML = html;
@@ -374,6 +376,7 @@ function renderClasses() {
     var color = gradeIdx % 2 === 0 ? 'blue' : 'yellow';
     byGrade[g].forEach(function (c) {
       var count = c.count == null ? 'View students' : c.count + ' student' + (c.count === 1 ? '' : 's');
+      if (c.teacher) count = c.teacher + ' · ' + count;
       html += '<button type="button" class="row-link ' + color + '" data-class="' + esc(c.index) + '">' +
         '<span class="t"><span class="big">' + esc(c.name) + '</span><span class="small">' + esc(count) + '</span></span>' + CHEV_R + '</button>';
     });
